@@ -1,1 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Albert Nyanyisi | Frontend Developer</title>
+        <style>
+            *{box-sizing: border-box;}
+            body{
+                margin:0;
+                font-family: Arial, sans-serif;
+                background:#0f172a;
+                color:white;
+            }
+            nav{
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                padding:15px 30px;
+                background:#020617;
+                position:sticky;
+                top:0;
+            }
+            nav a{
+                color:#38bdf8;
+                text-decoration:none;
+                margin-left:20px;
+            }
+            header{
+                text-align:center;
+                padding:80px 20px;
+                background:linear-gradient(135deg,#1e293b,#020617);
+            }
+            header h1{
+                font-size:2.8rem;
+                margin-bottom:10px;
+            }
+            header p{opacity:0.8;}
+            .btn{
+                display:inline-block;
+                margin-top:20px;
+                background:#38bdf8;
+                color:black;
+                padding:12px 20px;
+                border-radius:8px;
+                text-decoration:none;
+            }
+            section{
+                max-width:1100px;
+                margin:auto;
+                padding:60px 20px;
+            }
+            h2{
+                color:#38bdf8;
+                margin-bottom:20px;
+            }
+            .projects{
+                display:grid;
+                grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+                gap:20px;
+            }
+            .card {
+                background:#1e293b;
+                padding:20px; border-radius:12px;
+                transition:0.3s;
+            }
+            .card:hover{transform:translateY(-6px);}
+            .card a{
+                display:inline-block;
+                margin-top:10px;
+                color:#38bdf8;
+            }
+            input{
+                padding:10px;
+                width:70%;
+                border:none;
+                border-radius:6px;
+            }
+            button{
+                padding:10px;
+                border:none;
+                border-radius:6px;
+                background:#38bdf8;
+                cursor:pointer;
+            }
+            ul{
+                list-style:none;
+                padding:0;
+            }
+            li{
+                background:#1e293b;
+                margin-top:10px;
+                padding:10px;
+                border-radius:6px;
+                display:flex;
+                justify-content:space-between;
+            }
+            footer{
+                text-align:center;
+                padding:20px;
+                background:#020617;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <h3>Albert</h3>
+            <div>
+                <a href="#about">About</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+        <header>
+            <h1>Albert Nyanyisi</h1>
+            <p>Frontend Developer | JavaScript | Python</p>
+            <a href="#projects" class="btn">View My Work</a>
+        </header>
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                I am a frontend developer specializing in building responsive and interactive websites using HTML, CSS, and JavaScript.<br>I have strong debugging skills, allowing me to quickly identify and fix issues in code to ensure smooth performance and functionality.
+            </p>
+            <p>
+                In addition, I have experience working with Excel for data handling, basic analysis, and automation, as well as Python for scripting and problem-solving.I focus on clean code, efficiency, and delivering reliable solutions for real-world problems.
+            </p>
+        </section>
+        
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects">
+                <div class="card">
+                    <h3>Business Website</h3>
+                    <p>Responsive website for a cleaning services company with modern layout and contact section.
+                    </p>
+                    <a href="#">Live Demo (add later)</a>
+                </div>
 
+                <div class="card">
+                    <h3>To-Do List App</h3>
+                    <p>
+                        JavaScript app with task creation, deletion, and local storage.
+                    </p>
+                    <a href="#">Live Demo (add later)</a>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>Live JavaScript Demo</h2>
+            <input type="text" id="taskInput" placeholder="Enter a task">
+            <button onclick="addTask()">Add</button>
+            <ul id="taskList"></ul>
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>
+                Email: albertnyanyisi@gmail.com <br><br>WhatsApp: +254795451044
+            </p>
+        </section>
+        <footer>
+            <p>&copy;2026 Albert Nyanyisi</p>
+        </footer>
+        <script>
+            let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+            function renderTasks() {
+                const list = document.getElementById("taskList");
+                list.innerHTML = "";
+                tasks.forEach((task, index) => {
+                    const li = document.createElement("li");
+                    li.innerHTML = `${task} <button onclick="removeTask(${index})">X</button>`;
+                    list.appendChild(li);
+                });
+            }
+                
+            function addTask() {
+                const input = document.getElementById("taskInput");
+                const value = input.value.trim();
+                if(!value) return;
+                tasks.push(value);
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                input.value = "";
+                renderTasks();
+            }
+                
+            function removeTask(index) {
+                tasks.splice(index,1);
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                renderTasks();
+                }
+            renderTasks();
+        </script>
+    </body>
+</html>
